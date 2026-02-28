@@ -22,6 +22,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] MonsterSpawner monsterSpawner;
     [SerializeField] EnergySpawner energySpawner;
     
+    [Header("硬幣")]
+    [SerializeField] GameObject[] LifeCoins;
 
     // Start is called before the first frame update
     void Start()
@@ -99,6 +101,15 @@ public class GameManager : MonoBehaviour
                 // State
                 chance--;
                 player.chanceNum = chance;
+
+                // update Life Coins
+                int tempLen = LifeCoins.Length;
+                for (int i = 0; i < tempLen; i++)
+                {
+                    LifeCoins[i].SetActive(i < chance);
+                }
+                
+                
                 monsterSpawner.StopGenerate();
                 energySpawner.StopGenerate();
 

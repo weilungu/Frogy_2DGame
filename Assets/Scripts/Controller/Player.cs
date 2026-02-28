@@ -21,7 +21,7 @@ public class Player : MonoBehaviour
 
     
     [Header("能量控制")]
-    [SerializeField] GameObject[] EnergyPoint;
+    [SerializeField] GameObject[] energyPoint;
     [SerializeField] int _energy;
     [SerializeField] int MaxEnergy = 6;
     
@@ -84,27 +84,27 @@ public class Player : MonoBehaviour
     // --- Energy ---
     void SetEnergy(int num)
     {
-        for (int i = 0; i < EnergyPoint.Length; i++)
+        for (int i = 0; i < energyPoint.Length; i++)
         {
-            EnergyPoint[i].SetActive(false);
-        } // Close All Energy Point
+            energyPoint[i].SetActive(false);
+        } // Reset Energy Point
         
         Energy += num;
         
         for (int i = 0; i < Energy; i++)
         {
-            EnergyPoint[i].SetActive(true);
-        } // 更新 Energy
+            energyPoint[i].SetActive(true);
+        } // 依序開啟 Energy Point
     }
 
     public void EnergyFull()
     {
         SetEnergy(MaxEnergy);
         
-        for (int i = 0; i < EnergyPoint.Length; i++)
+        for (int i = 0; i < energyPoint.Length; i++)
         {
-            EnergyPoint[i].SetActive(true);
-        } // Open All Energy Point
+            energyPoint[i].SetActive(false);
+        } // Reset Energy Point
         
     }
 
