@@ -71,7 +71,7 @@ public class Player : MonoBehaviour
 
         if (other.gameObject.CompareTag("Energy"))
         {
-            Energy++;
+            SetEnergy(1);
             
             Destroy(other.gameObject);
         }
@@ -81,9 +81,19 @@ public class Player : MonoBehaviour
     // --- self-Method ---
     
     // --- Energy ---
+    void SetEnergy(int num)
+    {
+        Energy += num;
+        
+        // for (int i = 0; i < 5; i++)
+        // {
+        //     
+        // }
+    }
+
     public void EnergyFull()
     {
-        Energy = MaxEnergy;
+        SetEnergy(MaxEnergy);
     }
 
     // --- state ---
@@ -94,13 +104,13 @@ public class Player : MonoBehaviour
             anim.SetTrigger("Attack");
             
             Instantiate(bullet, shootPosition.position, Quaternion.identity);
-            Energy -= consumeEnergy;
+            SetEnergy(-consumeEnergy);
         }
     }
     
     public void Prepare()
     {
-        Energy = MaxEnergy;
+        SetEnergy(MaxEnergy);
         
         rb.velocity = Vector2.zero;
         rb.bodyType = RigidbodyType2D.Kinematic;
@@ -125,7 +135,7 @@ public class Player : MonoBehaviour
             rb.bodyType = RigidbodyType2D.Dynamic;
             rb.velocity = new Vector2(0, speed);
 
-            Energy--;
+            SetEnergy(-1);
 
             anim.SetTrigger("Jump");
             particle.Play();
