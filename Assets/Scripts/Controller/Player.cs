@@ -15,12 +15,13 @@ public class Player : MonoBehaviour
 
     [Header("手動輸入")] 
     [SerializeField] int speed = 5;
+    [SerializeField] public int chanceNum;
     [SerializeField] Vector2 startPosition;
     [SerializeField] public GameObject shadow;
 
     
     [Header("能量控制")]
-    [SerializeField] public int chanceNum;
+    [SerializeField] GameObject[] EnergyPoint;
     [SerializeField] int _energy;
     [SerializeField] int MaxEnergy = 6;
     
@@ -83,17 +84,28 @@ public class Player : MonoBehaviour
     // --- Energy ---
     void SetEnergy(int num)
     {
+        for (int i = 0; i < EnergyPoint.Length; i++)
+        {
+            EnergyPoint[i].SetActive(false);
+        } // Close All Energy Point
+        
         Energy += num;
         
-        // for (int i = 0; i < 5; i++)
-        // {
-        //     
-        // }
+        for (int i = 0; i < Energy; i++)
+        {
+            EnergyPoint[i].SetActive(true);
+        } // 更新 Energy
     }
 
     public void EnergyFull()
     {
         SetEnergy(MaxEnergy);
+        
+        for (int i = 0; i < EnergyPoint.Length; i++)
+        {
+            EnergyPoint[i].SetActive(true);
+        } // Open All Energy Point
+        
     }
 
     // --- state ---
