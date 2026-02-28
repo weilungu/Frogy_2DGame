@@ -5947,7 +5947,7 @@ GameObject:
   m_Component:
   - component: {fileID: 323629904}
   m_Layer: 5
-  m_Name: Hint_Collition
+  m_Name: Hint_Collection
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8075,6 +8075,7 @@ MonoBehaviour:
   - {fileID: 500007995}
   - {fileID: 1258319251}
   - {fileID: 144435805}
+  Hints: {fileID: 323629903}
 --- !u!4 &977322496
 Transform:
   m_ObjectHideFlags: 0

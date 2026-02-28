@@ -100,12 +100,6 @@ public class Player : MonoBehaviour
     public void EnergyFull()
     {
         SetEnergy(MaxEnergy);
-        
-        for (int i = 0; i < energyPoint.Length; i++)
-        {
-            energyPoint[i].SetActive(false);
-        } // Reset Energy Point
-        
     }
 
     // --- state ---

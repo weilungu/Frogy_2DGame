@@ -22,8 +22,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] MonsterSpawner monsterSpawner;
     [SerializeField] EnergySpawner energySpawner;
     
-    [Header("硬幣")]
+    [Header("UI 輸入")]
     [SerializeField] GameObject[] LifeCoins;
+    [SerializeField] GameObject Hints;
 
     // Start is called before the first frame update
     void Start()
@@ -87,11 +88,15 @@ public class GameManager : MonoBehaviour
                 player.Prepare();
                 monsterSpawner.StopGenerate();
                 energySpawner.StopGenerate();
+                
+                Hints.SetActive(true);
                 break;
 
             case GameState.InGame:
                 monsterSpawner.StartGenerate();
                 energySpawner.StartGenerate();
+                
+                Hints.SetActive(false);
                 break;
 
             case GameState.Dead:
@@ -108,7 +113,6 @@ public class GameManager : MonoBehaviour
                 {
                     LifeCoins[i].SetActive(i < chance);
                 }
-                
                 
                 monsterSpawner.StopGenerate();
                 energySpawner.StopGenerate();
