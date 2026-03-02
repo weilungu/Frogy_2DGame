@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
     [Header("UI 輸入")]
     [SerializeField] GameObject[] LifeCoins;
     [SerializeField] GameObject Hints;
+    [SerializeField] GameObject Score_Panel;
 
     // Start is called before the first frame update
     void Start()
@@ -105,14 +106,16 @@ public class GameManager : MonoBehaviour
                 
                 // State
                 chance--;
-                player.chanceNum = chance;
+                // player.chanceNum = chance;
 
-                // update Life Coins
-                int tempLen = LifeCoins.Length;
-                for (int i = 0; i < tempLen; i++)
-                {
-                    LifeCoins[i].SetActive(i < chance);
-                }
+                // // update Life Coins
+                // int tempLen = LifeCoins.Length;
+                // for (int i = 0; i < tempLen; i++)
+                // {
+                //     LifeCoins[i].SetActive(i < chance);
+                // }
+                
+                LifeCoinsUpdate();
                 
                 monsterSpawner.StopGenerate();
                 energySpawner.StopGenerate();
@@ -121,7 +124,18 @@ public class GameManager : MonoBehaviour
                 break;
 
             case GameState.Score:
+                Score_Panel.SetActive(true);
                 break;
+        }
+    }
+
+    void LifeCoinsUpdate()
+    {
+        // update Life Coins
+        int tempLen = LifeCoins.Length;
+        for (int i = 0; i < tempLen; i++)
+        {
+            LifeCoins[i].SetActive(i < chance);
         }
     }
     
@@ -139,13 +153,13 @@ public class GameManager : MonoBehaviour
 
     
     // UI-Functions
-    public void PauseGame()
+    public void TimeFreeze()
     {
         // time pause
         Time.timeScale = 0;
     }
 
-    public void BackToGame()
+    public void TimeFlow()
     {
         Time.timeScale = 1;
     }
@@ -153,5 +167,13 @@ public class GameManager : MonoBehaviour
     public void ExitGame()
     {
         Application.Quit();
+    }
+
+    public void InitGame()
+    {
+        chance = player.chanceNum;
+        LifeCoinsUpdate();
+        
+        SetGameState(GameState.Prepare);
     }
 }
