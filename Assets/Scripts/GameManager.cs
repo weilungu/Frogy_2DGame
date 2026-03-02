@@ -124,7 +124,7 @@ public class GameManager : MonoBehaviour
                 break;
         }
     }
-
+    
     void GameCheck()
     {
         if (chance > 0)
@@ -135,5 +135,23 @@ public class GameManager : MonoBehaviour
 
         SetGameState(GameState.Score);
         return;
+    }
+
+    
+    // UI-Functions
+    public void PauseGame()
+    {
+        // time pause
+        Time.timeScale = 0;
+    }
+
+    public void BackToGame()
+    {
+        Time.timeScale = 1;
+    }
+
+    public void ExitGame()
+    {
+        Application.Quit();
     }
 }
